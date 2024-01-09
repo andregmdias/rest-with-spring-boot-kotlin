@@ -16,21 +16,17 @@ class PersonController {
     private lateinit var personService: PersonService
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun index(): ResponseEntity<List<Person>> {
-        return ResponseEntity.ok(personService.findAll())
-    }
+    fun index(): ResponseEntity<List<Person>> = ResponseEntity.ok(personService.findAll())
+
 
     @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun show(@PathVariable(value = "id") id: Long): ResponseEntity<Person> {
-        val fetched = personService.findById(id)
-        return ResponseEntity.ok(fetched)
-    }
+    fun show(@PathVariable(value = "id") id: Long): ResponseEntity<Person> =
+            ResponseEntity.ok(personService.findById(id))
 
     @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun create(@RequestBody person: Person): ResponseEntity<Person> {
-        personService.create(person)
-        return ResponseEntity.status(HttpStatus.CREATED).body(person)
-    }
+    fun create(@RequestBody person: Person): ResponseEntity<Person> =
+            ResponseEntity.status(HttpStatus.CREATED).body(personService.create(person))
+
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable(value = "id") id: Long): ResponseEntity<Nothing> {
