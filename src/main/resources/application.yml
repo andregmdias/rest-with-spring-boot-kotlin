@@ -1,1 +1,9 @@
-
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rest_with_spring_boot_kt_db
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
