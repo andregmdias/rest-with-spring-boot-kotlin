@@ -1,4 +1,6 @@
 package br.com.giannatech.restwithspringbootkotlin.repositories
 
-interface PersonRepository {
-}
+import br.com.giannatech.restwithspringbootkotlin.model.Person
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface PersonRepository : JpaRepository<Person, Long> {}
