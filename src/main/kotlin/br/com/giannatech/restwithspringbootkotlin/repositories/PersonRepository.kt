@@ -2,5 +2,7 @@ package br.com.giannatech.restwithspringbootkotlin.repositories
 
 import br.com.giannatech.restwithspringbootkotlin.model.Person
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 
-interface PersonRepository : JpaRepository<Person, Long> {}
+@Repository
+interface PersonRepository : JpaRepository<Person, Long>
