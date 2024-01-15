@@ -14,9 +14,7 @@ import java.util.logging.Logger
 @Service
 class PersonService(
         @Autowired
-        val personRepository: PersonRepository,
-        @Autowired
-        val modelMapper: ModelMapper
+        val personRepository: PersonRepository
 ) {
     private val logger: Logger = Logger.getLogger(PersonService::class.java.name)
 
