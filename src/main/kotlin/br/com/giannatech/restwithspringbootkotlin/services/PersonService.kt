@@ -1,10 +1,11 @@
-package br.com.giannatech.restwithspringbootkotlin.services.v1
+package br.com.giannatech.restwithspringbootkotlin.services
 
 import br.com.giannatech.restwithspringbootkotlin.data.vo.v1.PersonVO
 import br.com.giannatech.restwithspringbootkotlin.exceptions.UserNotFoundException
 import br.com.giannatech.restwithspringbootkotlin.mapper.DozerMapper
 import br.com.giannatech.restwithspringbootkotlin.model.Person
 import br.com.giannatech.restwithspringbootkotlin.repositories.PersonRepository
+import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.logging.Logger
@@ -13,15 +14,16 @@ import java.util.logging.Logger
 @Service
 class PersonService(
         @Autowired
-        val personRepository: PersonRepository
+        val personRepository: PersonRepository,
+        @Autowired
+        val modelMapper: ModelMapper
 ) {
     private val logger: Logger = Logger.getLogger(PersonService::class.java.name)
 
     fun findAll(): List<PersonVO> {
         logger.info("Retrieving all persons")
         val persons: List<Person> = personRepository.findAll()
-
-        return DozerMapper.parseListObjects(persons, PersonVO::class.java)
+        return DozerMapper.parseListObjects(persons, List<>::class)
     }
 
     fun findById(id: Long): PersonVO? {

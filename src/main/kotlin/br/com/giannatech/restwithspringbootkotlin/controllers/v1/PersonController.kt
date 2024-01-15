@@ -1,7 +1,7 @@
 package br.com.giannatech.restwithspringbootkotlin.controllers.v1
 
 import br.com.giannatech.restwithspringbootkotlin.data.vo.v1.PersonVO
-import br.com.giannatech.restwithspringbootkotlin.services.v1.PersonService
+import br.com.giannatech.restwithspringbootkotlin.services.PersonService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType

@@ -4,7 +4,6 @@ import br.com.giannatech.restwithspringbootkotlin.data.vo.v1.PersonVO
 import br.com.giannatech.restwithspringbootkotlin.exceptions.UserNotFoundException
 import br.com.giannatech.restwithspringbootkotlin.model.Person
 import br.com.giannatech.restwithspringbootkotlin.repositories.PersonRepository
-import br.com.giannatech.restwithspringbootkotlin.services.v1.PersonService
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
