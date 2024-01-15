@@ -1,7 +1,7 @@
-package br.com.giannatech.restwithspringbootkotlin.controllers
+package br.com.giannatech.restwithspringbootkotlin.controllers.v1
 
-import br.com.giannatech.restwithspringbootkotlin.model.Person
-import br.com.giannatech.restwithspringbootkotlin.services.PersonService
+import br.com.giannatech.restwithspringbootkotlin.data.vo.v1.PersonVO
+import br.com.giannatech.restwithspringbootkotlin.services.v1.PersonService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -9,23 +9,23 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/persons")
+@RequestMapping("/api/v1/persons")
 class PersonController {
 
     @Autowired
     private lateinit var personService: PersonService
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun index(): ResponseEntity<List<Person>> = ResponseEntity.ok(personService.findAll())
+    fun index(): ResponseEntity<List<PersonVO>> = ResponseEntity.ok(personService.findAll())
 
 
     @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun show(@PathVariable(value = "id") id: Long): ResponseEntity<Person> =
+    fun show(@PathVariable(value = "id") id: Long): ResponseEntity<PersonVO> =
             ResponseEntity.ok(personService.findById(id))
 
     @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun create(@RequestBody person: Person): ResponseEntity<Person> =
-            ResponseEntity.status(HttpStatus.CREATED).body(personService.create(person))
+    fun create(@RequestBody personVO: PersonVO): ResponseEntity<PersonVO> =
+            ResponseEntity.status(HttpStatus.CREATED).body(personService.create(personVO))
 
 
     @DeleteMapping("/{id}")

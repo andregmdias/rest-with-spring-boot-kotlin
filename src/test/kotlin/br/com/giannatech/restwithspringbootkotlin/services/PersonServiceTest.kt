@@ -1,12 +1,13 @@
 package br.com.giannatech.restwithspringbootkotlin.services
 
+import br.com.giannatech.restwithspringbootkotlin.data.vo.v1.PersonVO
 import br.com.giannatech.restwithspringbootkotlin.exceptions.UserNotFoundException
 import br.com.giannatech.restwithspringbootkotlin.model.Person
 import br.com.giannatech.restwithspringbootkotlin.repositories.PersonRepository
+import br.com.giannatech.restwithspringbootkotlin.services.v1.PersonService
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -45,6 +46,7 @@ class PersonServiceTest {
         val result = personService.findAll()
         verify(exactly = 1) { personRepository.findAll() }
         assertEquals(result.size, 0)
+        assertInstanceOf(List::class.java, result)
     }
 
     @Test
@@ -66,7 +68,7 @@ class PersonServiceTest {
         val result = personService.findById(1)
         verify(exactly = 1) { personRepository.findById(1) }
         assertNotNull(result)
-        assertInstanceOf(Person::class.java, result)
+        assertInstanceOf(PersonVO::class.java, result)
         assertEquals(person1.id, result?.id)
     }
 
@@ -81,6 +83,14 @@ class PersonServiceTest {
         verify(exactly = 1) { personRepository.findById(99) }
         val errorMessage = result.message
         assertEquals("User not found with the given id", errorMessage)
+    }
+
+    @Test
+    @DisplayName("PersonService.update -> when has no person with the given id, should update the person with the update params")
+    fun testUpdate_whenHasPersonWithTheGivenId_shouldUpdatethePersonWithTheUpdateParams() {
+        val updateParams: Person = Person(address = "Rua dos Funileiros")
+
+
     }
 
     @Test
