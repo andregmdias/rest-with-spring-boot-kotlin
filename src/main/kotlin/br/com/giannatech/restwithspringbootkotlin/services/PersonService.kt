@@ -5,7 +5,6 @@ import br.com.giannatech.restwithspringbootkotlin.exceptions.UserNotFoundExcepti
 import br.com.giannatech.restwithspringbootkotlin.mapper.DozerMapper
 import br.com.giannatech.restwithspringbootkotlin.model.Person
 import br.com.giannatech.restwithspringbootkotlin.repositories.PersonRepository
-import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.logging.Logger
@@ -21,7 +20,7 @@ class PersonService(
     fun findAll(): List<PersonVO> {
         logger.info("Retrieving all persons")
         val persons: List<Person> = personRepository.findAll()
-        return DozerMapper.parseListObjects(persons, List<>::class)
+        return DozerMapper.parseListObjects(persons, PersonVO::class.java)
     }
 
     fun findById(id: Long): PersonVO? {
