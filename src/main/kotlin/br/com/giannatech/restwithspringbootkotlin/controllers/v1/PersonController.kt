@@ -15,20 +15,31 @@ class PersonController {
     @Autowired
     private lateinit var personService: PersonService
 
-    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE])
     fun index(): ResponseEntity<List<PersonVO>> = ResponseEntity.ok(personService.findAll())
 
 
-    @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(
+        "/{id}",
+        consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
+    )
     fun show(@PathVariable(value = "id") id: Long): ResponseEntity<PersonVO> =
             ResponseEntity.ok(personService.findById(id))
 
-    @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
+    @PostMapping(
+        consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
+    )
     fun create(@RequestBody personVO: PersonVO): ResponseEntity<PersonVO> =
             ResponseEntity.status(HttpStatus.CREATED).body(personService.create(personVO))
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(
+        "/{id}",
+        consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
+    )
     fun delete(@PathVariable(value = "id") id: Long): ResponseEntity<Nothing> {
         personService.delete(id)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
